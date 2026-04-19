@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# ~/.zshrc — Raspberry Pi / Raspbian Quality-of-Life Config
+# ~/.zshrc — Raspberry Pi / Raspbian
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── Oh My Zsh (optional — comment out if not installed) ──────────────────────
@@ -10,10 +10,10 @@
 
 # ── History ───────────────────────────────────────────────────────────────────
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt HIST_IGNORE_DUPS       # Don't record duplicate commands
-setopt HIST_IGNORE_SPACE      # Don't record commands starting with a space
+HISTSIZE=5000
+SAVEHIST=5000
+#setopt HIST_IGNORE_DUPS       # Don't record duplicate commands
+#setopt HIST_IGNORE_SPACE      # Don't record commands starting with a space
 setopt SHARE_HISTORY          # Share history across sessions
 setopt APPEND_HISTORY         # Append rather than overwrite history file
 setopt EXTENDED_HISTORY       # Record timestamps in history
@@ -25,7 +25,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # Case-insensitive completi
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # ── Key Bindings ──────────────────────────────────────────────────────────────
-bindkey -e                          # Emacs-style line editing
+#bindkey -e                          # Emacs-style line editing
 bindkey '^[[A' history-search-backward   # Up arrow → history search
 bindkey '^[[B' history-search-forward    # Down arrow → history search
 bindkey '^[[H' beginning-of-line         # Home key
@@ -50,7 +50,7 @@ _git_branch() {
 PROMPT='%F{green}%n@%m%f:%F{cyan}%~%f$(_git_branch) %F{white}$%f '
 
 # ── Environment ───────────────────────────────────────────────────────────────
-export EDITOR=nano            # Change to vim/nvim if preferred
+export EDITOR=nvim
 export VISUAL=nano
 export PAGER=less
 export LESS='-R --quit-if-one-screen'
@@ -59,13 +59,13 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # ── Raspberry Pi: GPIO / Hardware ─────────────────────────────────────────────
-alias pinout='pinout'                          # GPIO pinout diagram (python3-gpiozero)
-alias cpuinfo='cat /proc/cpuinfo | grep -i model'
-alias vcgencmd='sudo vcgencmd'
-alias cputemp='vcgencmd measure_temp'          # CPU temperature
-alias cpufreq='vcgencmd get_throttled'         # Throttling status (0x0 = healthy)
-alias gpumem='vcgencmd get_mem gpu'            # GPU memory split
-alias armmem='vcgencmd get_mem arm'            # ARM memory split
+alias rpcmd-pinout='pinout'                          # GPIO pinout diagram (python3-gpiozero)
+alias rpcmd-cpuinfo='cat /proc/cpuinfo | grep -i model'
+alias rpcmd-vcgencmd='sudo vcgencmd'
+alias rpcmd-cputemp='vcgencmd measure_temp'          # CPU temperature
+alias rpcmd-cpufreq='vcgencmd get_throttled'         # Throttling status (0x0 = healthy)
+alias rpcmd-gpumem='vcgencmd get_mem gpu'            # GPU memory split
+alias rpcmd-armmem='vcgencmd get_mem arm'            # ARM memory split
 
 # ── System ────────────────────────────────────────────────────────────────────
 alias reboot='sudo reboot'
@@ -147,6 +147,7 @@ alias gco='git checkout'
 alias gb='git branch'
 
 # ── Python / pip ──────────────────────────────────────────────────────────────
+alias p='python3'
 alias python='python3'
 alias pip='pip3'
 alias venv='python3 -m venv venv && source venv/bin/activate'
